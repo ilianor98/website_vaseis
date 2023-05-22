@@ -1,0 +1,24 @@
+
+create library table
+
+CREATE TABLE library (
+  library_id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  book_id INT(11) NOT NULL,
+  inventory INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (library_id),
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+);
+
+insert book to library
+
+INSERT INTO library (name, book_id, inventory)
+VALUES ('Book Title', 1, 1);  -- Replace 'Book Title' with the actual title, and 1 with the actual book_id
+
+update book inventory in library
+
+UPDATE library
+SET inventory = inventory + 1
+WHERE book_id = 1;  -- Replace 1 with the actual book_id
+
+

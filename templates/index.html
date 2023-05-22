@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+      body {
+        background-image: url("/static/img/bookcase.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+      }
+      .center {
+        text-align: center;
+      }
+      .nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        background-color: #333;
+        padding: 0 20px;
+      }
+      .nav-bar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        margin-right: 20px;
+      }
+      .nav-bar .nav-item:last-child {
+        margin-right: 0;
+      }
+      .container {
+        margin-top: 20px;
+      }
+      .content-block {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #000;
+      }
+      .title-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <div class="nav-bar">
+        <a href="/">Home</a>
+        <div>
+          <a href="/rent">Rent</a>
+          <a href="/rate">Rate</a>
+          <a href="/school">School</a>
+          <a href="/users">Users</a>
+          <a href="/rating">Rating</a>
+          <a href="/add_user">Add User</a>
+          <a href="/delayed">Delayed</a>
+        </div>
+        <form action="{{ url_for('logout') }}" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+      <div class="container content-block">
+        {% block content %}
+        <div class="title-container">
+          <h1 style="color: black">This is the home page</h1>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

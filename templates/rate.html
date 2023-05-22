@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <h1>Rate</h1>
+  <div>
+    <p>Select a rating:</p>
+    <div class="rating">
+      <input type="radio" id="star5" name="rating" value="5">
+      <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+      <input type="radio" id="star4" name="rating" value="4">
+      <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+      <input type="radio" id="star3" name="rating" value="3">
+      <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+      <input type="radio" id="star2" name="rating" value="2">
+      <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+      <input type="radio" id="star1" name="rating" value="1">
+      <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+    </div>
+  </div>
+  <form id="rate-form" action="/rate" method="POST">
+    <div>
+      <label for="book_id">Book ID:</label>
+      <input type="text" id="book_id" name="book_id">
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <input type="hidden" id="rating" name="rating">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const ratingInputs = document.querySelectorAll('input[type="radio"][name="rating"]');
+    const ratingInputHidden = document.getElementById('rating');
+
+    ratingInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        ratingInputHidden.value = input.value;
+      });
+    });
+
+    const rateForm = document.getElementById('rate-form');
+    rateForm.addEventListener('submit', (event) => {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Perform any additional validation or actions before submitting the form
+      // For example, you can confirm the rating is selected and book ID is entered
+      
+      // Then manually submit the form
+      rateForm.submit();
+    });
+  </script>
+{% endblock %}
