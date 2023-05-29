@@ -1,0 +1,39 @@
+{% extends "index.html" %} {% block content %}
+<h1 style="color: black">Delayed Items</h1>
+<div class="container content-block">
+  <ul class="item-list">
+    {% for item in data %} {% if item['is_delayed'] %}
+    <li>
+      Borrow ID: {{ item['borrow_id'] }}<br />
+      User ID: {{ item['user_id'] }}<br />
+      Book ID: {{ item['book_id'] }}<br />
+      Borrow Date: {{ item['borrow_date'] }}<br />
+      Return Date: {{ item['return_date'] }}<br />
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+<style>
+  .item-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .item-list li {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+  }
+
+  .container.content-block {
+    background-color: purple;
+  }
+
+  h1 {
+    color: black;
+  }
+</style>

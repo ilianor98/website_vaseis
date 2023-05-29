@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background-image: url("/static/img/bookcase.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+      }
+      .center {
+        text-align: center;
+      }
+      .nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        background-color: #333;
+        padding: 0 20px;
+      }
+      .nav-bar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        margin-right: 20px;
+      }
+      .nav-bar .nav-item:last-child {
+        margin-right: 0;
+      }
+      .container {
+        margin-top: 20px;
+      }
+      .container-title {
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #000;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .content_title_block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: black;
+      }
+      .content-block1 {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #000;
+      }
+
+      .content-block {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #000;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .content-block .inner-container {
+        flex-basis: calc(20% - 20px);
+        background-color: #d3d3d3;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #964b00;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      .button:not(:last-child) {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <div class="nav-bar">
+        <a href="/">Home</a>
+        <div>
+          <a href="/rent">Rent</a>
+          <a href="/rate">Rate</a>
+          <a href="/school">School</a>
+          <a href="/users">Users</a>
+          <a href="/rating">Rating</a>
+          <a href="/add_user">Add User</a>
+          <a href="/delayed">Delayed</a>
+        </div>
+        <form action="{{ url_for('logout') }}" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+
+      <div class="container content-block1">
+        {% block content %}
+        <div class="container-title content_title_block">
+          <h1 class="center">WELCOME TO OUR PAGE</h1>
+        </div>
+        <div class="container content-block">
+          <div class="inner-container">
+            <h2>BOOKS</h2>
+            <p>
+              In total we have {{num_books}} books across all the libraries.
+            </p>
+            <a href="/book" class="button">View books</a>
+          </div>
+          <div class="inner-container">
+            <h2>LIBRARIES</h2>
+            <p>In total we have {{num_lib}} libraries in our system.</p>
+            <a href="/school" class="button">View schools</a>
+          </div>
+          <div class="inner-container">
+            <h2>USERS</h2>
+            <p>In total we have {{num_user}} number of users!</p>
+            <p>
+              From those users we have {{num_stud}} students and {{num_prof}}
+              professors!
+            </p>
+            <a href="/users" class="button">View Users</a>
+            <a href="/add_user" class="button">Add User</a>
+          </div>
+          <div class="inner-container">
+            <h2>Container 4</h2>
+            <p>This is the content of container 4.</p>
+          </div>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
