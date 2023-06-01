@@ -19,7 +19,7 @@
       }
       .nav-bar {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* Adjusted to space items evenly */
         align-items: center;
         height: 50px;
         background-color: #333;
@@ -96,27 +96,68 @@
       .button:not(:last-child) {
         margin-right: 10px;
       }
+
+      /* Updated CSS for the h1 tag and the surrounding div */
+      .user-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-info h1 {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+      .flashes {
+        list-style: none;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+
+      .flashes li {
+        color: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+
+      .flashes .success {
+        background-color: #4caf50;
+      }
+      .flashes .error {
+        background-color: #f44336;
+      }
     </style>
   </head>
   <body>
     <div class="center">
       <div class="nav-bar">
-        <a href="/">Home</a>
         <div>
-          <a href="/rent">Rent</a>
-          <a href="/rate">Rate</a>
-          <a href="/school">School</a>
-          <a href="/users">Users</a>
+          <a href="/">Home</a>
           <a href="/rating">Rating</a>
-          <a href="/add_user">Add User</a>
-          <a href="/delayed">Delayed</a>
+          <a href="/admin">Admin</a>
         </div>
-        <form action="{{ url_for('logout') }}" method="POST">
-          <button type="submit">Logout</button>
-        </form>
+        <div class="user-info">
+          <h1>Currently logged in: {{username}}, role = {{role}}.</h1>
+          <form action="{{ url_for('logout') }}" method="POST">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
       </div>
 
       <div class="container content-block1">
+        <div class="container">
+          <!-- Your content here -->
+          {% with messages = get_flashed_messages() %} {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %} {% if message.startswith('Error:') %}
+            <li class="error">{{ message[6:] }}</li>
+            {% else %}
+            <li class="success">{{ message }}</li>
+            {% endif %} {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
+        </div>
+
         {% block content %}
         <div class="container-title content_title_block">
           <h1 class="center">WELCOME TO OUR PAGE</h1>
@@ -128,6 +169,7 @@
               In total we have {{num_books}} books across all the libraries.
             </p>
             <a href="/book" class="button">View books</a>
+            <a href="/user_reservations" class="button">View reservations</a>
           </div>
           <div class="inner-container">
             <h2>LIBRARIES</h2>
@@ -145,8 +187,9 @@
             <a href="/add_user" class="button">Add User</a>
           </div>
           <div class="inner-container">
-            <h2>Container 4</h2>
-            <p>This is the content of container 4.</p>
+            <h2>ACCOUNT</h2>
+            <p>View account details.</p>
+            <a href="/account" class="button">View Account</a>
           </div>
         </div>
         {% endblock %}

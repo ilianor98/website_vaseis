@@ -13,5 +13,8 @@
     <li>{{ author.name }}</li>
     {% endfor %}
   </ul>
+  <a href="{{ url_for('rate', isbn=book.ISBN) }}" class="button"
+    >Rate This Book</a
+  >
 </div>
 {% endblock %}

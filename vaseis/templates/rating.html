@@ -1,13 +1,12 @@
-{% extends "index.html" %}
+{% extends "index.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
 
-    {% block head %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    {% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <h1 style="color: black">Ratings</h1>
-<div class="container content-block">
+<div class="container content-block1">
   <div class="item-list">
     <div class="list-header">
       <span class="list-header-span">Book Title</span>
@@ -20,14 +19,12 @@
       <span class="list-row-span">{{ item['ISBN'] }}</span>
       <span class="list-row-span">
         <div class="rating">
-          {% set rating = item['average_rating'] %}
-          {% for i in range(5) %}
-            {% if rating >= i + 1 %}
-              <i class="fas fa-star"></i>
-            {% else %}
-              <i class="far fa-star"></i>
-            {% endif %}
-          {% endfor %}
+          {% set rating = item['average_rating'] %} {% for i in range(5) %} {%
+          if rating >= i + 1 %}
+          <i class="fas fa-star"></i>
+          {% else %}
+          <i class="far fa-star"></i>
+          {% endif %} {% endfor %}
         </div>
       </span>
     </div>
