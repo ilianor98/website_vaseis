@@ -1,0 +1,89 @@
+QUERIES:
+
+123123123123
+
+APO 25/05
+
+queries 
+
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+view users and their roles:
+SELECT username, first_name, last_name,
+       CASE
+           WHEN role = 1 THEN 'Student'
+           WHEN role = 2 THEN 'Professor'
+           WHEN role = 3 THEN 'Admin'
+           ELSE 'Unknown'
+       END AS role_name
+FROM user_role_view;
+
+average book rating:
+SELECT AVG(rating) AS average_rating
+FROM ratings
+WHERE book_id = <your_book_id>;
+
+average book rating for all the books: == procedure: avgrating()
+SELECT b.titleBK, b.ISBN, AVG(r.rating) AS average_rating
+FROM book b
+LEFT JOIN ratings r ON b.ISBN = r.book_id
+GROUP BY b.titleBK, b.ISBN;
+
+SELECT CURDATE();
+
+3.1.1:
+SELECT school_id, COUNT(*) AS reservations
+FROM reservation where borrow_date = '_-05-_'
+GROUP BY school_id;
+/////////////////////////////////////////////////////\\\\\\\\\\\
+SELECT YEAR(reservation_date) AS year,
+       MONTH(reservation_date) AS month,
+       school_id,
+       COUNT(*) AS count
+FROM reservation
+WHERE YEAR(reservation_date) = 2023 AND MONTH(reservation_date) = 6 <----------- MONTH
+GROUP BY YEAR(reservation_date), MONTH(reservation_date), school_id
+ORDER BY YEAR(reservation_date), MONTH(reservation_date), school_id;
+
+
+
+3.1.2:
+SELECT DISTINCT a.name AS author_name, c.category
+FROM author a
+JOIN book_author ba ON a.id = ba.author_id
+JOIN book_category bc ON ba.book_isbn = bc.book_id
+JOIN category c ON bc.category_id = c.id
+WHERE c.category = 'Fiction';
+
+150 book 150 author 1-1 30 authors random
+
+
+
+
+SELECT b.titleBK
+FROM book AS b
+JOIN book_author AS ba ON b.ISBN = ba.book_isbn
+GROUP BY b.ISBN
+HAVING COUNT(*) <= 2;
+
+MariaDB [vas]> select u.id, u.age from user u inner join role l on u.id = l.user_id inner join reservation r on u.id = r.user_id where u.age < 40 and l.role = 2;
+
+insert into reservation (book_id, user_id, reservation_status, reservation_date, borrow_date, expected_date, return_date, is_approved, school_id) values (646271, 363, 1, '2023-01-01', '2023-01-04','2023-01-11','2023-01-05', 1, 1);
+
+select u.first_name, u.last_name, c.category_id from user u inner join role l on u.id = l.user_id inner join reservation r on u.id = r.user_id inner join book_category c on r.book_id = c.book_id where u.age < 40 and l.role = 2 and c.category_id = 2;
+
+
+create view book_inventory_view as select b.titleBK, b.ISBN, s.school_id, s.inventory from book b join book_school s on b.ISBN = s.book_id;
+
+
+INSERT INTO ratings (book_id, user_id, rating)
+SELECT b.ISBN, u.id, FLOOR(RAND() * 5) + 1
+FROM book b
+CROSS JOIN (SELECT id FROM user ORDER BY RAND() LIMIT 5) u
+WHERE (
+  SELECT COUNT(*) FROM ratings r
+  WHERE r.book_id = b.ISBN
+) < 5;
+
+select count(u.id) from user u inner join role l on u.id=l.user_id where role = 2;
