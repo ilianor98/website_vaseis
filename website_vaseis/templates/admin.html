@@ -1,0 +1,39 @@
+{% extends "index.html" %} {% block content %}
+<h1>Welcome, Admin: {{admin_name}}!</h1>
+<p>
+  What would you like to do today?
+  <p>
+    <div class="container content-block">
+      <div class="inner-container">
+        <h2>BOOKS</h2>
+        <p>View books, update books or a new book.</p>
+        <a href="/book" class="button">View books</a>
+        <a href="/book_update" class="button">Update books</a>
+        <a href="/book_add" class="button">Add book</a>
+      </div>
+      <div class="inner-container">
+        <h2>RESERVATIONS</h2>
+        <p>View reservations.</p>
+        <a href="/open_reservations" class="button">View open reservations</a>
+        <a href="/pending_reservations" class="button">View pending reservations</a>
+        <a href="/approved_reservations" class="button">View approved reservations</a>
+        <a href="/past_reservations" class="button">View past reservations</a>
+      </div>
+      <div class="inner-container">
+        <h2>SCHOOL</h2>
+        <p>View school info or update it.</p>
+        <a href="/school_view" class="button">View school</a>
+        <a href="/school_update" class="button">Update school</a>
+      </div>
+      <div class="inner-container">
+        <h2>USERS</h2>
+        <p>View users, add new users or update current users.</p>
+        <a href="/users" class="button">View Users</a>
+        <a href="/add_user" class="button">Add User</a>
+        <a href="/update_user" class="button">Update User</a>
+        <a href="/delayed_users" class="button">Delayed Users</a>
+      </div>
+    </div>
+    {% endblock %}
+  </p>
+</p>

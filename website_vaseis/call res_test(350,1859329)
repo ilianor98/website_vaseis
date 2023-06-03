@@ -1,0 +1,95 @@
+call res_test(350,1859329)
+
+209611 2 0
+176719 2 3
+199 
+
+DELIMITER //
+
+CREATE PROCEDURE return_book(IN reservation_ex INT)
+BEGIN
+    -- Declare variables
+    DECLARE book_id_val INT;
+    DECLARE school_id_val INT;
+    DECLARE user_id_val INT;
+
+    -- Get book_id, school_id, and user_id from the reservation
+    SELECT book_id, school_id, user_id INTO book_id_val, school_id_val, user_id_val
+    FROM reservation
+    WHERE reservation_id = reservation_ex;
+
+    -- Update the return_date to current date
+    UPDATE reservation
+    SET return_date = CURDATE()
+    WHERE reservation_id = reservation_ex;
+
+    -- Increase inventory by 1 for the book and school
+    UPDATE book_school
+    SET inventory = inventory + 1
+    WHERE book_id = book_id_val AND school_id = school_id_val;
+
+    -- Decrease num_books by 1 for the user
+    UPDATE user
+    SET num_books = num_books - 1
+    WHERE id = user_id_val;
+    
+    SELECT 'Book returned successfully.' AS message;
+    CALL check_book_inv(book_id_val, school_id_val);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE check_book_inv(IN book_ex INT, IN school_ex INT)
+BEGIN
+    DECLARE reservation_id_val INT;
+
+    SELECT reservation_id INTO reservation_id_val FROM reservation WHERE book_id = book_ex AND school_id = school_ex AND reservation_status = 0 ORDER BY reservation_date LIMIT 1;
+
+    IF reservation_id_val IS NOT NULL THEN
+        CALL borrow_book(reservation_id_val);
+    END IF;
+END //
+
+DELIMITER ;
+
+
+764289, 3);
+
+DELIMITER //
+
+CREATE PROCEDURE return_book(IN reservation_ex INT)
+BEGIN
+    -- Declare variables
+    DECLARE book_id_val INT;
+    DECLARE school_id_val INT;
+    DECLARE user_id_val INT;
+
+    -- Get book_id, school_id, and user_id from the reservation
+    SELECT book_id, school_id, user_id INTO book_id_val, school_id_val, user_id_val
+    FROM reservation
+    WHERE reservation_id = reservation_ex;
+
+    -- Update the return_date to current date
+    UPDATE reservation
+    SET return_date = CURDATE()
+    WHERE reservation_id = reservation_ex;
+
+    -- Increase inventory by 1 for the book and school
+    UPDATE book_school
+    SET inventory = inventory + 1
+    WHERE book_id = book_id_val AND school_id = school_id_val;
+
+    -- Decrease num_books by 1 for the user
+    UPDATE user
+    SET num_books = num_books - 1
+    WHERE id = user_id_val;
+
+    SELECT 'Book returned successfully.' AS message;
+
+    -- Call check_book_inv procedure
+    CALL check_book_inv(book_id_val, school_id_val);
+END //
+
+DELIMITER ;
