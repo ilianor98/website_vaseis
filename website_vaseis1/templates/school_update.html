@@ -1,0 +1,124 @@
+{% extends "index.html" %} {% block content %}
+<h1>Update School Details</h1>
+<div class="container content-block1">
+  <form
+    action="{{ url_for('school_update', school_id=school_id) }}"
+    method="post"
+  >
+    <table class="school-details">
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td><label for="name">Name:</label></td>
+        <td>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{ school.name }}"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="city">City:</label></td>
+        <td>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            value="{{ school.city }}"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="phone">Phone:</label></td>
+        <td>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value="{{ school.phone }}"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="email">Email:</label></td>
+        <td>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="{{ school.email }}"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="director_name">Director Name:</label></td>
+        <td>
+          <input
+            type="text"
+            id="director_name"
+            name="director_name"
+            value="{{ school.director_name }}"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="admin_name">Admin Name:</label></td>
+        <td>
+          <input
+            type="text"
+            id="admin_name"
+            name="admin_name"
+            value="{{ school.admin_name }}"
+            required
+          />
+        </td>
+      </tr>
+    </table>
+    <button type="submit">Update School</button>
+  </form>
+</div>
+<style>
+  .container.content-block1 {
+    text-align: center;
+  }
+
+  table.school-details {
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+  }
+
+  table.school-details th,
+  table.school-details td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  table.school-details th {
+    background-color: #f5f5f5;
+  }
+
+  table.school-details label {
+    font-weight: bold;
+  }
+
+  table.school-details input {
+    width: 100%;
+    padding: 5px;
+  }
+
+  button[type="submit"] {
+    margin-top: 10px;
+  }
+</style>
+{% endblock %}

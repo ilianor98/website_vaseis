@@ -1,0 +1,45 @@
+{% extends "index.html" %} {% block content %}
+<h1>Welcome, Master Admin: {{admin_name}}!</h1>
+<p>
+  What would you like to do today?
+  <p>
+    <div class="container content-block">
+      <div class="inner-container1">
+        <h2>ADMINS</h2>
+        <p>View or edit admins.</p>
+        <a href="/admins" class="button">View admins</a>
+        <a href="/admins_edit" class="button">Edit admins</a>
+        <a href="/admins_add" class="button">Add admins</a>
+        <a href="/admins_delete" class="button">Delete admins</a>
+      </div>
+      <div class="inner-container1">
+        <h2>ACTIONS 3.1</h2>
+        <p>Pick an action</p>
+        <a href="/total_reservations" class="button">3.1.1:Total number of reservations</a>
+        <a href="/category_author" class="button">3.1.2:Category Info</a>
+        <a href="/top_users" class="button">3.1.3:Young professors</a>
+        <a href="/no_res" class="button">3.1.4:Author without reservation</a>
+        <a href="/same" class="button">3.1.5:Admins with same number</a>
+        <a href="/popcat" class="button">3.1.6:Popular Combination</a>
+        <a href="/less" class="button">3.1.7:Authors 5 less than TOP</a>
+      </div>
+      <div class="inner-container1">
+        <h2>BACKUP</h2>
+        <p>Backup the database.</p>
+        <a href="/backup_interface" class="button">Backup inteface</a>
+      </div>
+      
+    </div>
+  </p>
+</p>
+<style>
+    .content-block .inner-container1 {
+        flex-basis: calc(40% - 20px);
+        background-color: #d3d3d3;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+      }
+    </style>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "index.html" %} {% block content %}
+<h1>Category and Author List</h1>
+<div class="container content-block1">
+  <form method="post">
+    <label for="category">Select Category:</label>
+    <select name="category" id="category">
+      <option value="">All Categories</option>
+      {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.category }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+
+  <div class="item-list">
+    <div class="list-header">
+      <span>Category</span>
+      <span>Author</span>
+      <span>First Name</span>
+      <span>Last Name</span>
+    </div>
+    {% for reservation in reservations %}
+    <div class="list-row">
+      <div class="reservation-details">
+        <div class="column">{{ reservation.category }}</div>
+        <div class="column">{{ reservation.name }}</div>
+        <div class="column">{{ reservation.first_name }}</div>
+        <div class="column">{{ reservation.last_name }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+  }
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .list-header span {
+    flex-basis: 25%;
+  }
+
+  .list-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .reservation-details {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .column {
+    flex-basis: 25%;
+    margin-right: 10px;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "index.html" %} {% block content %}
+<h1>Category Comparison</h1>
+<div class="container content-block1">
+  <div class="item-list">
+    <div class="list-header">
+      <span>Category 1 ID</span>
+      <span>Category 1</span>
+      <span>Category 2 ID</span>
+      <span>Category 2</span>
+      <span>Reservation Count</span>
+    </div>
+    {% for category in categories %}
+    <div class="list-row">
+      <div class="category-details">
+        <div class="column">{{ category.category_1_id }}</div>
+        <div class="column">{{ category.category_1 }}</div>
+        <div class="column">{{ category.category_2_id }}</div>
+        <div class="column">{{ category.category_2 }}</div>
+        <div class="column">{{ category.reservation_count }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<style>
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+  }
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .list-header span {
+    flex-basis: 20%;
+  }
+
+  .list-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .category-details {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .column {
+    flex-basis: 20%;
+    margin-right: 10px;
+  }
+</style>
+{% endblock %}

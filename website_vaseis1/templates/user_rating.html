@@ -1,0 +1,77 @@
+{% extends "index.html" %} {% block content %}
+<h1>User Ratings</h1>
+<div class="container content-block1">
+  <form action="/user_rating" method="post">
+    <label for="user_id">User ID:</label>
+    <input type="text" name="user_id" id="user_id" required />
+
+    <label for="category_id">Category:</label>
+    <select name="category_id" id="category_id" required>
+      <option value="" disabled selected>Select a category</option>
+      {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.name }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div class="item-list">
+    <div class="list-header">
+      <span>First Name</span>
+      <span>Last Name</span>
+      <span>Category</span>
+      <span>Average Rating</span>
+    </div>
+    {% for rating in ratings %}
+    <div class="list-row">
+      <div class="rating-details">
+        {% for column, value in rating.items() %}
+        <div class="column">{{ value }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<style>
+  /* CSS styles for the item list */
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+  }
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .list-header span {
+    flex-basis: 25%;
+  }
+
+  .list-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .rating-details {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .column {
+    flex-basis: 25%;
+    margin-right: 10px;
+  }
+</style>
+{% endblock %}
